@@ -22,7 +22,7 @@ const schema = new mongoose.Schema({
     required: true,
     minlength: 4,
     select: false,
-  }
-}, { versionKey: false })
+  },
+}, { versionKey: false });
 
 module.exports = mongoose.model('user', schema);

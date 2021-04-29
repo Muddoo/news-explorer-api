@@ -43,4 +43,4 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getUser, createUser, login }
+module.exports = { getUser, createUser, login };

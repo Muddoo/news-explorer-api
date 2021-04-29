@@ -5,53 +5,53 @@ const NotFoundError = require('../Error/NotFoundError');
 const schema = new mongoose.Schema({
   keyword: {
     type: String,
-    required: true
+    required: true,
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
   text: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: String,
-    required: true
+    required: true,
   },
   source: {
     type: String,
-    required: true
+    required: true,
   },
   link: {
     type: String,
     required: true,
     validate: {
-      validator: value => validator.isURL(value, { protocols: ['http','https','ftp'], require_tld: true, require_protocol: true }),
-      message: () => 'Must be a Valid URL'
-    }
+      validator: (value) => validator.isURL(value, { protocols: ['http', 'https', 'ftp'], require_tld: true, require_protocol: true }),
+      message: () => 'Must be a Valid URL',
+    },
   },
   image: {
     type: String,
     required: true,
     validate: {
-      validator: value => validator.isURL(value, { protocols: ['http','https','ftp'], require_tld: true, require_protocol: true }),
-      message: () => 'Must be a Valid URL'
-    }
+      validator: (value) => validator.isURL(value, { protocols: ['http', 'https', 'ftp'], require_tld: true, require_protocol: true }),
+      message: () => 'Must be a Valid URL',
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
-    select: false
-  }
-})
+    select: false,
+  },
+});
 
 schema.statics.ownerId = function isOwner(id) {
   return this.findOne({ _id: id })
     .then((article) => {
       if (!article) return Promise.reject(new NotFoundError('Card Not Found'));
-      return card.owner;
+      return article.owner;
     })
     .catch((err) => Promise.reject({ statusCode: err.statusCode || 400, message: err.message }));
 };

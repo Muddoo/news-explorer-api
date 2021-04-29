@@ -18,12 +18,12 @@ const deleteArticle = async (req, res, next) => {
   try {
     const ownerId = await Articles.ownerId(req.params.articleId);
     return String(ownerId) === req.user._id
-      ? Cards.findByIdAndDelete(req.params.articleId)
-        .then(() => res.send({ message: 'Card Deleted' }))
+      ? Articles.findByIdAndDelete(req.params.articleId)
+        .then(() => res.send({ message: 'Article Deleted' }))
       : next({ statusCode: 403, message: 'User Not Allowed' });
   } catch (err) {
     return next(err);
   }
 };
 
-module.exports = { getArticles, createArticle, deleteArticle}
+module.exports = { getArticles, createArticle, deleteArticle };

@@ -10,7 +10,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 // require('dotenv').config();
 
 const app = express();
-const { users, articles} = require('./routes');
+const { users, articles } = require('./routes');
 const { createUser, login } = require('./controller/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
@@ -47,7 +47,7 @@ app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(4).max(16),
-    name: Joi.string().required().min(4)
+    name: Joi.string().required().min(4),
   }),
 }), createUser);
 
