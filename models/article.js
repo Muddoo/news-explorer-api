@@ -49,8 +49,9 @@ const schema = new mongoose.Schema({
 
 schema.statics.ownerId = function isOwner(id) {
   return this.findOne({ _id: id })
+    .select('+owner')
     .then((article) => {
-      if (!article) return Promise.reject(new NotFoundError('Card Not Found'));
+      if (!article) return Promise.reject(new NotFoundError('Article Not Found'));
       return article.owner;
     })
     .catch((err) => Promise.reject({ statusCode: err.statusCode || 400, message: err.message }));
