@@ -12,7 +12,7 @@ router.post('/', celebrate({
     date: Joi.string().required(),
     source: Joi.string().required(),
     link: Joi.string().required().uri(),
-    image: Joi.string().required().uri(),
+    image: Joi.string().required(),
   }).unknown(false),
 }), createArticle);
 

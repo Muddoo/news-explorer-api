@@ -3,7 +3,7 @@ const NotFoundError = require('../Error/NotFoundError');
 const UnauthorizedError = require('../Error/UnauthorizedError');
 
 const getArticles = (req, res, next) => {
-  Articles.find({})
+  Articles.find({owner: req.user._id})
     .then((all) => res.send(all))
     .catch(next);
 };
